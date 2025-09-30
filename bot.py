@@ -95,7 +95,6 @@ def passcode_handler(update, context):
 
     code = args[0].strip()
     if code == PASSCODE:
-        # Grant session for AUTH_DURATION seconds
         AUTH_SESSIONS[user_id] = time.time() + AUTH_DURATION
         update.message.reply_text(
             f"✅ Passcode accepted. You have access for {AUTH_DURATION//60} minutes.\n"
