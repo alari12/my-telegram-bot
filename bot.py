@@ -1,14 +1,14 @@
-from telegram.ext import Application, CommandHandler
 import os
+from telegram.ext import Updater, CommandHandler
 
-async def start(update, context):
-    await update.message.reply_text("Hello! 🚀 Your bot is alive!")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-def main():
-    TOKEN = os.getenv("TOKEN")  # BotFather token stored in Railway
-    app = Application.builder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.run_polling()
+def start(update, context):
+    update.message.reply_text("✅ Bot is running!")
 
 if __name__ == "__main__":
-    main()
+    updater = Updater(BOT_TOKEN, use_context=True)
+    dp = updater.dispatcher
+    dp.add_handler(CommandHandler("start", start))
+    updater.start_polling()
+    updater.idle()
